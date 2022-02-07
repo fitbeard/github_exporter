@@ -14,6 +14,10 @@ builds:
       - -X github.com/konradasb/github_exporter/build.Revision={{ .ShortCommit }}
       - -X github.com/konradasb/github_exporter/build.Date={{ .CommitDate }}
       - -X github.com/konradasb/github_exporter/build.Version={{ .Version }}
+    hooks:
+      post:
+        - cmd: upx {{ .Path }}
+          output: true
 archives:
   - replacements:
       darwin: Darwin
