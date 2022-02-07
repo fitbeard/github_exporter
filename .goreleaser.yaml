@@ -9,11 +9,14 @@ builds:
       - linux
     goarch:
       - amd64
-      - arm64
     ldflags:
       - -X github.com/konradasb/github_exporter/build.Revision={{ .ShortCommit }}
       - -X github.com/konradasb/github_exporter/build.Date={{ .CommitDate }}
       - -X github.com/konradasb/github_exporter/build.Version={{ .Version }}
+    hooks:
+      post:
+        - strip "{{ .Path }}"
+        - upx "{{ .Path }}"
 archives:
   - replacements:
       darwin: Darwin
